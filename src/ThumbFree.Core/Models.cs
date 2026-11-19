@@ -63,9 +63,9 @@ public sealed record ModelSpec(string Id, string Label, Language Language, Engin
 
 public static class ModelCatalog
 {
-    private const string Parakeet110M = "https://github.com/shivam098/thumbfree/releases/download/models-parakeet-110m-1";
+    private const string Parakeet110M = "https://github.com/shivam098/thumbfree-windows/releases/download/models-parakeet-110m-1";
     private const string Parakeet06B = "https://huggingface.co/csukuangfj/sherpa-onnx-nemo-parakeet-tdt-0.6b-v2-int8/resolve/84b478d541cdbf0c296a7ab5f1e20a6f8f998114";
-    private const string KrokoLive = "https://github.com/shivam098/thumbfree/releases/download/models-kroko-en-live-1";
+    private const string KrokoLive = "https://github.com/shivam098/thumbfree-windows/releases/download/models-kroko-en-live-1";
 
     /// <summary>
     /// Kroko ASR English streaming Zipformer (Banafo, CC BY-SA 4.0) + Edge-Punct-Casing punctuation (Apache-2.0). About

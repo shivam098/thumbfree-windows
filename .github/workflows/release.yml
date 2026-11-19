@@ -1,0 +1,56 @@
+name: Release
+
+# A tag v* builds the Windows zips (x64 and ARM64) and publishes them in one GitHub release with SHA256SUMS.txt.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    name: Windows zips (x64 and ARM64)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: The app's version matches the tag
+        shell: pwsh
+        run: |
+          $tag = '${{ github.ref_name }}'.TrimStart('v')
+          $version = ([xml](Get-Content src/ThumbFree.App/ThumbFree.App.csproj)).Project.PropertyGroup.Version | Where-Object { $_ } | Select-Object -First 1
+          if ($version -ne $tag) { Write-Error "ThumbFree.App.csproj says $version but the tag is $tag"; exit 1 }
+      - name: Tests
+        run: dotnet test ThumbFree.slnx -c Release
+      - name: Package (with the Visual C++ runtime)
+        shell: pwsh
+        run: ./scripts/package.ps1 -RequireVcRuntime
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: dist/*.zip
+
+  publish:
+    name: GitHub release
+    needs: [windows]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          (cd dist && sha256sum * > SHA256SUMS.txt && cat SHA256SUMS.txt)
+          pre=""
+          case "$version" in 0.*|*-*) pre="--prerelease";; esac
+          cat > notes.md <<EOF
+          \`ThumbFree-${version}-win-x64.zip\` for Intel and AMD PCs, \`ThumbFree-${version}-win-arm64.zip\` for Snapdragon and other ARM PCs. Unzip, run \`ThumbFree.exe\`, then tap Ctrl+Win to dictate. The [Windows guide](https://github.com/shivam098/thumbfree-windows/blob/main/docs/windows.md) has the rest.
+          EOF
+          gh release create "$GITHUB_REF_NAME" dist/* --repo "$GITHUB_REPOSITORY" --title "ThumbFree $version" --notes-file notes.md --generate-notes $pre

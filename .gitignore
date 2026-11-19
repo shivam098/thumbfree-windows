@@ -7,6 +7,8 @@ obj/
 TestResults/
 publish/
 artifacts/
+# Recordings and models made while testing; the shared test recordings in tests/audio are kept.
 *.wav
+!tests/audio/*.wav
 *.bin
 dist/
