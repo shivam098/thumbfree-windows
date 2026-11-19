@@ -14,7 +14,7 @@ public sealed class ModelFactAttribute : FactAttribute
         var spec = ModelCatalog.ById(modelId) ?? throw new ArgumentException($"Unknown model {modelId}", nameof(modelId));
         if (!TestModels.Store.IsInstalled(spec))
         {
-            Skip = $"{spec.Id} isn't in {TestModels.Store.PrimaryFolder} (run: dotnet run --project windows/tools/SpeechBench -- download)";
+            Skip = $"{spec.Id} isn't in {TestModels.Store.PrimaryFolder} (run: dotnet run --project tools/SpeechBench -- download)";
         }
     }
 }
@@ -30,7 +30,7 @@ internal static class TestModels
     public static int Threads { get; } = Math.Clamp(Environment.ProcessorCount / 2, 2, 8);
 }
 
-/// <summary>The speech clips in tests/audio at the repository root (shared with the Android tests).</summary>
+/// <summary>The speech clips in tests/audio at the repository root (the same in every ThumbFree repo).</summary>
 internal static class Audio
 {
     public static float[] Read(string name)

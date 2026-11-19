@@ -27,10 +27,10 @@ expect: tonight.\nThings to do today:\n- Order groceries.\n- Go on a walk.\n- Ca
 clipboard
 # Recordings played as if spoken, through each English model: the last words survive a tap right after them.
 model en-kroko-live
-wav: ..\..\..\tests\audio\send-logs.wav
+wav: ..\..\tests\audio\send-logs.wav
 expect: send me the latest build logs
 model en-parakeet-110m
-wav: ..\..\..\tests\audio\genres.wav
+wav: ..\..\tests\audio\genres.wav
 expect: different genres
 # Subject: one line, so no list layout.
 keys: Tab

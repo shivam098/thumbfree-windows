@@ -28,7 +28,7 @@ Each keeps its own license.
 
 The Kroko model files (encoder, decoder, joiner, tokens) and the Edge-Punct-Casing punctuation model are used
 unmodified. They are downloaded separately from the app, from the
-[`models-kroko-en-live-1`](https://github.com/shivam098/thumbfree/releases/tag/models-kroko-en-live-1) release. Kroko
+[`models-kroko-en-live-1`](https://github.com/shivam098/thumbfree-windows/releases/tag/models-kroko-en-live-1) release. Kroko
 ASR is by [Banafo](https://huggingface.co/Banafo) and licensed under Creative Commons Attribution-ShareAlike 4.0
 (<https://creativecommons.org/licenses/by-sa/4.0/>). Edge-Punct-Casing is licensed under the Apache License,
 Version 2.0 (<https://www.apache.org/licenses/LICENSE-2.0>).
@@ -37,7 +37,7 @@ Version 2.0 (<https://www.apache.org/licenses/LICENSE-2.0>).
 
 The Parakeet models are by NVIDIA, licensed under Creative Commons Attribution 4.0
 (<https://creativecommons.org/licenses/by/4.0/>). ThumbFree uses the int8 ONNX exports made for sherpa-onnx. The 110M
-model is mirrored in the [`models-parakeet-110m-1`](https://github.com/shivam098/thumbfree/releases/tag/models-parakeet-110m-1)
+model is mirrored in the [`models-parakeet-110m-1`](https://github.com/shivam098/thumbfree-windows/releases/tag/models-parakeet-110m-1)
 release.
 
 ## Oriserve/Whisper-Hindi2Hinglish-Swift and Apex

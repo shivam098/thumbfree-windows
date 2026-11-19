@@ -8,21 +8,21 @@ processing time ÷ audio length) on the shared test clips (`tests/audio`), the t
 ```powershell
 # Download the English models (Kroko live 79 MB, Parakeet 110M 137 MB, Parakeet 0.6B 661 MB) into
 # %LOCALAPPDATA%\ThumbFree\models with ModelStore (resumable, SHA-256 checked):
-dotnet run --project windows/tools/SpeechBench -c Release -- download
+dotnet run --project tools/SpeechBench -c Release -- download
 
 # Benchmark every installed model (Hindi + English Whisper models are found in Voice Assistant's and Voice Dictation's
 # models folders too), or only the ones listed; --threads takes a list for a thread sweep:
-dotnet run --project windows/tools/SpeechBench -c Release
-dotnet run --project windows/tools/SpeechBench -c Release -- en-parakeet-110m en-kroko-live --threads 6,2,4,8
+dotnet run --project tools/SpeechBench -c Release
+dotnet run --project tools/SpeechBench -c Release -- en-parakeet-110m en-kroko-live --threads 6,2,4,8
 ```
 
-The integration tests in `windows/tests/ThumbFree.Speech.Tests` use the same models and skip when they aren't there.
+The integration tests in `tests/ThumbFree.Speech.Tests` use the same models and skip when they aren't there.
 
 ## How it measures
 
 - **Load**: creating the recognizer. **1st call**: the first transcription (1 s of silence) after loading, which the
   app does as a warm-up. Then each clip is transcribed 5 times and the median is shown (once only if a run takes over
-  3 s). "all three" is the three clips joined: 17.3 s of speech, the "17 s" in PLAN.md 4.4.
+  3 s). "all three" is the three clips joined: 17.3 s of speech, the "17 s" in [PLAN.md 4.4](https://github.com/shivam098/thumbfree-android/blob/main/docs/PLAN.md).
 - Whisper decodes at most 14 s at a time in the app (a 768-frame window), so it isn't run on the 17.3 s clip.
 - **Live typing**: Kroko gets each clip 100 ms at a time, as from the microphone, with a simulated clock (a chunk is
   decoded once it has been "recorded" and the previous one is done). A word *appears* when the text so far first holds
@@ -96,9 +96,9 @@ stop", "new line", "um") clean it up afterwards.
 
 ## What it means
 
-- **Parakeet 110M** turns the 17.3 s of speech into text in about 0.24 s (PLAN.md said 0.4 s), loads in under a
+- **Parakeet 110M** turns the 17.3 s of speech into text in about 0.24 s ([PLAN.md](https://github.com/shivam098/thumbfree-android/blob/main/docs/PLAN.md) said 0.4 s), loads in under a
   second, and is ready on the first call. 4 threads is as fast as 6; 8 is slower. 4 threads is a good default, which
-  matches PLAN.md 3.1 ("at most 4 decoding threads").
+  matches [PLAN.md 3.1](https://github.com/shivam098/thumbfree-android/blob/main/docs/PLAN.md) ("at most 4 decoding threads").
 - **Parakeet 0.6B** needs about 0.6 s for the same 17.3 s and 1.5 s to load: fine for "types when you finish".
 - **Kroko** keeps up with ease (a 100 ms chunk takes 2–4 ms on average; the encoder runs once per ~1.3 s and then takes
   30–70 ms), but words show about **1 s after they're spoken** (median; 1.6 s at p90, 1.9 s at worst). That's the

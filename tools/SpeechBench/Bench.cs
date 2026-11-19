@@ -132,7 +132,7 @@ internal static class Bench
     }
 }
 
-/// <summary>A test clip from tests/audio (and all three joined: the "17 s of speech" in PLAN.md).</summary>
+/// <summary>A test clip from tests/audio (and all three joined: the "17 s of speech" in thumbfree-android's PLAN.md).</summary>
 internal sealed record Clip(string Name, float[] Samples)
 {
     public double Seconds => Samples.Length / (double)Decoding.SampleRate;

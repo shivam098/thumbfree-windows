@@ -153,7 +153,7 @@ COMING FROM VOICE DICTATION
 UNINSTALL
   Exit from the tray, then delete this folder (and %LOCALAPPDATA%\ThumbFree and %APPDATA%\ThumbFree).
 
-Guide: https://github.com/shivam098/thumbfree/blob/main/docs/windows.md
+Guide: https://github.com/shivam098/thumbfree-windows/blob/main/docs/windows.md
 "@ | Set-Content (Join-Path $folder 'README-FIRST.txt') -Encoding UTF8
 
     $zip = "$folder.zip"

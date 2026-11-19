@@ -6,7 +6,7 @@ internal sealed record HelpSection(string Title, string[] Lines, (string Said, s
 /// <summary>Everything Help explains, in one place. The examples are rows of tests/vectors/layout.tsv, so they're what ThumbFree really types.</summary>
 internal static class HelpText
 {
-    public const string NoticesUrl = "https://github.com/shivam098/thumbfree/blob/main/windows/THIRD-PARTY-NOTICES.md";
+    public const string NoticesUrl = "https://github.com/shivam098/thumbfree-windows/blob/main/THIRD-PARTY-NOTICES.md";
 
     public static IReadOnlyList<HelpSection> Sections(AppSettings settings) =>
     [

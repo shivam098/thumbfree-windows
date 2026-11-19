@@ -2,20 +2,29 @@
 .SYNOPSIS
     Regenerates ThumbFree's Windows logo and app icon from the Android launcher icon, so every platform shows the same
     mark: the white microphone of android/app/src/main/res/drawable/ic_launcher_foreground.xml on the launcher colour
-    (tf_launcher_bg in android/app/src/main/res/values/colors.xml), drawn on a rounded tile.
+    (tf_launcher_bg in android/app/src/main/res/values/colors.xml) in thumbfree-android, drawn on a rounded tile.
 
     Writes assets\logo.png (512 px, README) and, in src\ThumbFree.App\Assets: app.ico (16 to 256 px: exe, tray and
     windows), logo-64.png (status pill, sidebar) and logo-256.png (first-run guide).
 
     Run with Windows PowerShell (it draws with WPF):  powershell -File assets\make-logo.ps1
+.PARAMETER AndroidRes
+    The Android app's res folder. By default, the one in a thumbfree-android clone next to this repo's.
 #>
+param(
+    [string] $AndroidRes = (Join-Path (Split-Path -Parent (Split-Path -Parent $PSScriptRoot)) 'thumbfree-android\android\app\src\main\res')
+)
+
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName PresentationCore, PresentationFramework, WindowsBase
 
-$windows = Split-Path -Parent $PSScriptRoot
-$repo = Split-Path -Parent $windows
-$res = Join-Path $repo 'android\app\src\main\res'
-$appAssets = Join-Path $windows 'src\ThumbFree.App\Assets'
+$repo = Split-Path -Parent $PSScriptRoot
+$res = $AndroidRes
+if (-not (Test-Path (Join-Path $res 'drawable\ic_launcher_foreground.xml'))) {
+    throw "The Android launcher icon isn't in $res. Clone thumbfree-android next to this repo, or pass -AndroidRes."
+}
+
+$appAssets = Join-Path $repo 'src\ThumbFree.App\Assets'
 New-Item -ItemType Directory -Force $appAssets | Out-Null
 
 # The Android drawable: a 24-unit Material microphone, placed by its group's scale and offset in a 108-unit viewport.
