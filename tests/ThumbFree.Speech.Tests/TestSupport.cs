@@ -30,7 +30,7 @@ internal static class TestModels
     public static int Threads { get; } = Math.Clamp(Environment.ProcessorCount / 2, 2, 8);
 }
 
-/// <summary>The speech clips in tests/audio at the repository root (the same recordings in every ThumbFree repo).</summary>
+/// <summary>The speech clips in tests/audio at the repository root (the same in every ThumbFree repo).</summary>
 internal static class Audio
 {
     public static float[] Read(string name)

@@ -3,8 +3,9 @@ using ThumbFree.Core;
 namespace ThumbFree.Core.Tests;
 
 /// <summary>
-/// The shared vectors every ThumbFree platform must pass (tests/vectors at the repository root, the same files in every ThumbFree repo). formatter.tsv was
-/// generated from this C# formatter; Android runs the same rows, so a difference here means the platforms drifted.
+/// The shared vectors every ThumbFree platform must pass (tests/vectors at the repository root, the same files in every
+/// ThumbFree repo). formatter.tsv was generated from this C# formatter; Android runs the same rows, so a difference here
+/// means the platforms drifted.
 /// </summary>
 public class SharedVectorsTests
 {
