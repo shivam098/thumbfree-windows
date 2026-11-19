@@ -13,6 +13,7 @@ anyone else.** There is no account, no advertising and no analytics. (ThumbFree 
 | **Microphone** | Hearing you, only from one tap of Ctrl+Win to the next (10 minutes at most). | No. Audio is kept in memory, turned into text on the PC, then discarded. |
 | **Text you dictate** | Typing it into the text box you're using, and **History** (below). | No. |
 | **The text box you dictate into** | Spacing, capital letters, and email or list layout (below). | No. It isn't stored. |
+| **Clipboard** | ThumbFree types by pasting: it puts your dictation on the clipboard (marked so Windows keeps it out of clipboard history and the cloud clipboard), pastes it, then puts back what was there. If you copy something meanwhile, your copy is kept. | No. Nothing from it is stored. |
 | **Notifications** | Telling you if the microphone goes silent while you speak, and keeping a dictation that couldn't be typed so you can copy it. | No. |
 | **Internet** | Downloading the speech models once, from the addresses listed in the app's source code. Each file is checked against a fixed SHA-256 fingerprint. | Only standard download requests. No personal data is sent. |
 | **Settings, word list, personal dictionary** | Your preferences, in `%APPDATA%\ThumbFree\settings.json`. | No. |
@@ -43,7 +44,8 @@ anywhere. No audio is kept.
 ## "Help improve ThumbFree" (optional, off by default)
 
 If you turn this on, ThumbFree keeps your dictations in `%LOCALAPPDATA%\ThumbFree\samples` so you can choose to share
-them. Each one includes the audio, the recognised text, the typed text, the model name and the app version.
+them. Each one includes the audio, the recognised text, the typed text, the name of the app you dictated into, the time,
+the model and language, and the app version.
 
 - Nothing is kept from password fields, nor from web browsers, because a browser can't reliably say whether a window
   is private.
